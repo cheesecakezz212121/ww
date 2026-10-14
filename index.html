@@ -1,0 +1,2579 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المنصة التعليمية التفاعلية | مشروع ماجستير</title>
+  <style>
+    :root {
+      --primary: #1b4965;
+      --primary-dark: #0f2d3f;
+      --primary-light: #62b6cb;
+      --accent: #e76f51;
+      --accent-hover: #f4a261;
+      --success: #2a9d8f;
+      --warning: #e9c46a;
+      --danger: #e63946;
+      --bg: #f8f9fa;
+      --surface: #ffffff;
+      --text: #2b2d42;
+      --text-muted: #6c757d;
+      --border: #e2e8f0;
+      --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+      --shadow-md: 0 6px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 12px 24px rgba(0,0,0,0.12);
+      --radius: 14px;
+      --font: 'Segoe UI', Tahoma, Arial, 'Cairo', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: var(--font);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Academic Header */
+    .academic-header {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      color: white;
+      padding: 1.25rem 2rem;
+      border-bottom: 4px solid var(--accent);
+      box-shadow: var(--shadow-md);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .logo-box {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .logo-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-sm);
+      border: 2px solid rgba(255,255,255,0.8);
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .logo-circle svg {
+      width: 34px;
+      height: 34px;
+      fill: var(--primary);
+    }
+
+    .academic-titles {
+      text-align: center;
+      flex-grow: 1;
+    }
+
+    .project-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(4px);
+      padding: 0.2rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.25rem;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+
+    .academic-titles h1 {
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+
+    .academic-titles p {
+      font-size: 0.88rem;
+      opacity: 0.9;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .btn-header {
+      background: rgba(255,255,255,0.18);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn-header:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateY(-1px);
+    }
+
+    /* Sub-bar: Breadcrumbs & Master Thesis Info */
+    .sub-bar {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 2rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sub-bar-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .breadcrumbs a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .breadcrumbs a:hover {
+      text-decoration: underline;
+    }
+
+    .breadcrumbs span.active {
+      color: var(--text-muted);
+    }
+
+    .researcher-info {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      background: #edf2f7;
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      display: flex;
+      gap: 1rem;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 1.5rem auto 3rem;
+      padding: 0 1.25rem;
+      flex-grow: 1;
+    }
+
+    /* --- PAGE VIEW 1: HOME PAGE (الرئيسية لوحدها) --- */
+    .home-hero {
+      background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 3rem 2.5rem;
+      text-align: center;
+      margin-bottom: 2.5rem;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .home-hero::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(98, 182, 203, 0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .home-hero-badge {
+      display: inline-block;
+      background: #e0f2fe;
+      color: #0369a1;
+      padding: 0.35rem 1.2rem;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      border: 1px solid #bae6fd;
+    }
+
+    .home-hero h2 {
+      font-size: 2.2rem;
+      color: var(--primary-dark);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+      line-height: 1.3;
+    }
+
+    .home-hero p {
+      font-size: 1.1rem;
+      color: #4b5563;
+      max-width: 800px;
+      margin: 0 auto 1.75rem;
+      line-height: 1.8;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 1.75rem 1.5rem;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary-light);
+    }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      background: #eef2f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto 1.2rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.2rem;
+      color: var(--primary-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Lessons Section on Home (في آخر الرئيسية) */
+    .lessons-home-section {
+      background: white;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .section-title-wrap {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .section-title-wrap h3 {
+      font-size: 1.8rem;
+      color: var(--primary-dark);
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+    }
+
+    .section-title-wrap p {
+      font-size: 1rem;
+      color: var(--text-muted);
+    }
+
+    .lessons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .lesson-box {
+      background: #f8fafc;
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lesson-box.featured {
+      border-color: var(--primary);
+      background: #ffffff;
+      box-shadow: var(--shadow-md);
+    }
+
+    .lesson-box.featured::before {
+      content: 'النموذج النشط التجريبي';
+      position: absolute;
+      top: 15px;
+      left: -35px;
+      background: var(--accent);
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.25rem 2.5rem;
+      transform: rotate(-45deg);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .lesson-badge-top {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      display: inline-block;
+    }
+
+    .lesson-box h4 {
+      font-size: 1.4rem;
+      color: var(--primary-dark);
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+
+    .lesson-box p {
+      font-size: 0.92rem;
+      color: #4b5563;
+      margin-bottom: 1.25rem;
+      line-height: 1.6;
+    }
+
+    .lesson-stations-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .station-mini-pill {
+      background: #edf2f7;
+      color: #334155;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .btn-enter-lesson {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.9rem 1.5rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 10px rgba(27, 73, 101, 0.2);
+    }
+
+    .btn-enter-lesson:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(27, 73, 101, 0.3);
+    }
+
+    .btn-disabled-lesson {
+      background: #cbd5e1;
+      color: #64748b;
+      border: none;
+      padding: 0.9rem 1.5rem;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: not-allowed;
+      text-align: center;
+    }
+
+    /* --- PAGE VIEW 2: LESSON DETAIL PAGE (صفحة الدرس) --- */
+    .lesson-page-header {
+      background: white;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .btn-back-home {
+      background: #f1f5f9;
+      color: var(--primary-dark);
+      border: 1px solid #cbd5e1;
+      padding: 0.65rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-back-home:hover {
+      background: #e2e8f0;
+      transform: translateX(3px);
+    }
+
+    /* Tabs Bar for the 6 Stations */
+    .tabs-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tab-btn {
+      flex: 1;
+      min-width: 140px;
+      padding: 0.85rem 0.6rem;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      transition: all 0.2s ease;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tab-btn .tab-num {
+      font-size: 0.75rem;
+      background: #f1f5f9;
+      padding: 0.1rem 0.45rem;
+      border-radius: 10px;
+      color: var(--text-muted);
+    }
+
+    .tab-btn:hover {
+      background: #f8fafc;
+      transform: translateY(-2px);
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: 0 4px 10px rgba(27, 73, 101, 0.25);
+    }
+
+    .tab-btn.active .tab-num {
+      background: rgba(255,255,255,0.25);
+      color: white;
+    }
+
+    /* Section Panels */
+    .section-panel {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .section-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .panel-box {
+      background: white;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      padding: 2.25rem;
+    }
+
+    .panel-header {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px dashed #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .panel-header h3 {
+      font-size: 1.35rem;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .panel-header p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    .pedagogical-goal {
+      background: #e0f2fe;
+      color: #0369a1;
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      white-space: nowrap;
+      border-right: 3px solid #0284c7;
+    }
+
+    /* SECTION 1: نشاط صورة تمهيدي */
+    .warmup-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.75rem;
+    }
+
+    @media (max-width: 768px) {
+      .warmup-wrapper {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .image-work-area {
+      background: #f8fafc;
+      border: 2px dashed #cbd5e1;
+      border-radius: 12px;
+      padding: 1.25rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 380px;
+    }
+
+    .visual-comparison-box {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .visual-card {
+      background: white;
+      border-radius: 10px;
+      padding: 1rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-align: right;
+    }
+
+    .visual-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .visual-card.card-lazim .visual-badge {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .visual-card.card-mutaadi .visual-badge {
+      background: #fef3c7;
+      color: #b45309;
+    }
+
+    .sentence-lead {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 0.2rem;
+    }
+
+    .sentence-sub {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .custom-img-upload-btn {
+      background: #edf2f7;
+      border: 1px solid #cbd5e1;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: #334155;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+      margin-top: 0.5rem;
+    }
+
+    .custom-img-upload-btn:hover {
+      background: #e2e8f0;
+    }
+
+    .warmup-task-box {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .guided-questions {
+      background: #fdf6ec;
+      border-right: 4px solid var(--warning);
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+
+    .guided-questions h4 {
+      color: #92400e;
+      margin-bottom: 0.5rem;
+    }
+
+    .guided-questions ul {
+      padding-right: 1.25rem;
+      color: #78350f;
+    }
+
+    .guided-questions li {
+      margin-bottom: 0.35rem;
+    }
+
+    .interactive-notes-box {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .interactive-notes-box textarea {
+      width: 100%;
+      height: 120px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem;
+      font-size: 0.9rem;
+      resize: vertical;
+      outline: none;
+    }
+
+    .interactive-notes-box textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(27,73,101,0.15);
+    }
+
+    .btn-submit-notes {
+      background: var(--success);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-submit-notes:hover {
+      background: #238276;
+    }
+
+    .feedback-alert {
+      display: none;
+      padding: 0.85rem 1rem;
+      border-radius: 8px;
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+      font-size: 0.9rem;
+    }
+
+    /* SECTION 2: عرض الفيديو والشرح */
+    .video-section-grid {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 850px) {
+      .video-section-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .video-player-frame {
+      background: #0f172a;
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      box-shadow: var(--shadow-md);
+    }
+
+    .video-player-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .video-placeholder {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .play-btn-circle {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .play-btn-circle:hover {
+      transform: scale(1.1);
+    }
+
+    .video-controls-bar {
+      margin-top: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      background: #f1f5f9;
+      padding: 0.6rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+    }
+
+    .video-controls-bar input {
+      flex: 1;
+      padding: 0.4rem 0.6rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    .summary-box {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 1.25rem;
+      border: 1px solid var(--border);
+    }
+
+    .summary-box h4 {
+      color: var(--primary-dark);
+      font-size: 1.05rem;
+      margin-bottom: 0.75rem;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 0.4rem;
+    }
+
+    .concept-card {
+      background: white;
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      margin-bottom: 0.75rem;
+      border-right: 4px solid var(--primary-light);
+      font-size: 0.9rem;
+    }
+
+    .concept-card.alt {
+      border-right-color: var(--accent);
+    }
+
+    .concept-card strong {
+      color: var(--primary);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    /* SECTION 3: المسابقة التنافسية */
+    .quiz-container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .quiz-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f1f5f9;
+      padding: 0.75rem 1.25rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+    }
+
+    .quiz-timer {
+      background: var(--accent);
+      color: white;
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .quiz-score-badge {
+      background: var(--primary);
+      color: white;
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .quiz-question-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.25rem;
+    }
+
+    .quiz-question-text {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 1.25rem;
+      text-align: center;
+    }
+
+    .quiz-options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+    }
+
+    @media (max-width: 600px) {
+      .quiz-options-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .quiz-opt-btn {
+      background: #f8fafc;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+
+    .quiz-opt-btn:hover {
+      background: #e2e8f0;
+      border-color: #cbd5e1;
+    }
+
+    .quiz-opt-btn.correct {
+      background: #d1fae5 !important;
+      border-color: #10b981 !important;
+      color: #065f46 !important;
+    }
+
+    .quiz-opt-btn.wrong {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #991b1b !important;
+    }
+
+    .quiz-result-view {
+      text-align: center;
+      padding: 2.5rem 1rem;
+    }
+
+    .quiz-result-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    /* SECTION 4: اللعبة التعليمية (تصنيف الأفعال) */
+    .game-arena {
+      background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%);
+      border: 2px solid #bbf7d0;
+      border-radius: 14px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .game-stats {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      background: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .game-stat-item {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--primary);
+    }
+
+    .game-card-display {
+      background: white;
+      border: 3px solid var(--primary-light);
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 450px;
+      margin: 0 auto 2rem;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.25s ease;
+    }
+
+    .game-verb {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .game-sentence {
+      font-size: 1.15rem;
+      color: #4b5563;
+      background: #f3f4f6;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+    }
+
+    .game-drop-zones {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      max-width: 550px;
+      margin: 0 auto;
+    }
+
+    .drop-btn {
+      padding: 1.25rem 1rem;
+      border-radius: 14px;
+      border: 2px dashed;
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .drop-lazim {
+      background: #eff6ff;
+      border-color: #3b82f6;
+      color: #1d4ed8;
+    }
+
+    .drop-lazim:hover {
+      background: #3b82f6;
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .drop-mutaadi {
+      background: #fff7ed;
+      border-color: #f97316;
+      color: #c2410c;
+    }
+
+    .drop-mutaadi:hover {
+      background: #f97316;
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .game-feedback-toast {
+      margin-top: 1.25rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      min-height: 30px;
+    }
+
+    /* SECTION 5: التقويم التكويني والتقييم الذاتي */
+    .evaluation-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 800px) {
+      .evaluation-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .rubric-box, .drill-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .rubric-box h4, .drill-box h4 {
+      color: var(--primary-dark);
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .rubric-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    .rubric-table th, .rubric-table td {
+      border: 1px solid #cbd5e1;
+      padding: 0.65rem 0.5rem;
+      text-align: center;
+    }
+
+    .rubric-table th {
+      background: #e2e8f0;
+      color: #334155;
+    }
+
+    .rubric-table td:first-child {
+      text-align: right;
+      font-weight: 600;
+    }
+
+    .drill-item {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .drill-item p {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .drill-inputs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .drill-inputs select, .drill-inputs input {
+      flex: 1;
+      padding: 0.45rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    /* SECTION 6: الاختبار النهائي والشهادة */
+    .exam-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .exam-item {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .exam-item h5 {
+      font-size: 1.05rem;
+      color: var(--primary-dark);
+      margin-bottom: 0.85rem;
+    }
+
+    .exam-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .exam-opt-label {
+      background: white;
+      padding: 0.65rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+
+    .exam-opt-label:hover {
+      background: #edf2f7;
+    }
+
+    .btn-submit-exam {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 1rem;
+      transition: background 0.2s;
+    }
+
+    .btn-submit-exam:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Certificate Modal / View */
+    .certificate-container {
+      display: none;
+      background: #fffcf2;
+      border: 8px double #d4af37;
+      border-radius: 16px;
+      padding: 2.5rem;
+      text-align: center;
+      margin-top: 1.5rem;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+
+    .cert-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #78350f;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+
+    .cert-subtitle {
+      font-size: 1.1rem;
+      color: #92400e;
+      margin-bottom: 1.5rem;
+    }
+
+    .cert-student-name {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      border-bottom: 2px solid #d4af37;
+      display: inline-block;
+      padding: 0 2rem 0.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .cert-desc {
+      font-size: 1rem;
+      color: #4b5563;
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.8;
+    }
+
+    .cert-footer {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 2rem;
+      border-top: 1px solid #e5e7eb;
+      padding-top: 1.25rem;
+    }
+
+    .cert-sign-col {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #374151;
+    }
+
+    .cert-stamp {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 2px dashed #d4af37;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #b45309;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin: 0 auto 0.5rem;
+      transform: rotate(-10deg);
+    }
+
+    /* Researcher / Customization Drawer */
+    .researcher-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .researcher-modal.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: white;
+      border-radius: var(--radius);
+      width: 100%;
+      max-width: 650px;
+      padding: 2rem;
+      box-shadow: var(--shadow-lg);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-card h3 {
+      color: var(--primary-dark);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      color: #374151;
+    }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 0.65rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .btn-secondary {
+      background: #e2e8f0;
+      color: #334155;
+      border: none;
+      padding: 0.65rem 1.25rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.65rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* Print Styles for Certificate */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      .certificate-container, .certificate-container * {
+        visibility: visible;
+      }
+      .certificate-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Academic University Header -->
+  <header class="academic-header">
+    <div class="header-container">
+      
+      <!-- Right Logo: Faculty/Department -->
+      <div class="logo-box">
+        <div class="logo-circle" id="logoCircleRight" onclick="openResearcherModal()" title="انقر لتعديل بيانات الكلية">
+          <svg viewBox="0 0 24 24"><path d="M12 3L1 9L12 15L21 10.09V17H23V9M5 13.18V17.18L12 21L19 17.18V13.18L12 17L5 13.18Z"/></svg>
+        </div>
+        <div>
+          <div style="font-weight: 700; font-size: 0.95rem;" id="dispFaculty">كلية التربية</div>
+          <div style="font-size: 0.8rem; opacity: 0.85;" id="dispDept">قسم المناهج وتكنولوجيا التعليم</div>
+        </div>
+      </div>
+
+      <!-- Center Title -->
+      <div class="academic-titles">
+        <span class="project-badge">مشروع بحثي تكميلي لنيل درجة الماجستير</span>
+        <h1 id="dispProjectTitle" style="cursor:pointer;" onclick="goToHome()">المنصة التعليمية التفاعلية لقواعد اللغة العربية</h1>
+        <p id="dispUniv">جامعة الوادي الجديد | بيئة تعلم رقمية قائمة على الأنشطة التفاعلية</p>
+      </div>
+
+      <!-- Left Logo & Actions -->
+      <div class="header-actions">
+        <button class="btn-header" onclick="goToHome()" title="الصفحة الرئيسية">
+          <span> الرئيسية</span>
+        </button>
+        <button class="btn-header" onclick="openResearcherModal()" title="إعدادات المشروع">
+          <span>الإعدادات</span>
+        </button>
+        <div class="logo-circle" id="logoCircleLeft" onclick="openResearcherModal()" title="شعار الجامعة">
+          <svg viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"/></svg>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Sub-bar: Breadcrumbs & Master Thesis Info -->
+  <div class="sub-bar">
+    <div class="sub-bar-container">
+      <div class="breadcrumbs">
+        <a onclick="goToHome()">الرئيسية</a>
+        <span id="breadcrumbArrow" style="display:none;">&larr;</span>
+        <span class="active" id="currentBreadcrumb">الصفحة الرئيسية للمقرر</span>
+      </div>
+      <div class="researcher-info">
+        <span id="dispResearcher">إعداد الباحث: <strong>محمد أحمد</strong></span>
+        <span>|</span>
+        <span id="dispSupervisor">إشراف: <strong>أ.د/ لجنة الإشراف الأكاديمي</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTAINER -->
+  <main class="container">
+
+    <!-- ========================================== -->
+    <!-- VIEW 1: HOME PAGE (الرئيسية المستقلة)      -->
+    <!-- ========================================== -->
+    <div id="homeView">
+      
+      <!-- Academic Welcome Hero -->
+      <section class="home-hero">
+        <div class="home-hero-badge"> منصة التعلم الذاتي التفاعلية</div>
+        <h2>أهلاً بكم في بيئة التعلم الرقمية في قواعد اللغة العربية</h2>
+        <p>
+          تم تصميم هذه المنصة التعليمية كجزء من متطلبات دراسة الماجستير في المناهج وتكنولوجيا التعليم، بهدف تنمية المفاهيم والمهارات النحوية لدى المتعلمين من خلال الأنشطة البصرية التمهيدية، الفيديو التعليمي، مسابقات السرعة، الألعاب التفاعلية، والتقويم التكويني والنهائي المحوسب.
+        </p>
+        <button class="btn-enter-lesson" style="margin: 0 auto; padding: 1rem 2.5rem; font-size: 1.1rem;" onclick="scrollToLessons()">
+          <span>استعراض قائمة الدروس والبدء</span>
+        </button>
+      </section>
+
+      <!-- Educational Pillars / Features -->
+      <section class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🖼️</div>
+          <h3>التهيئة والتمهيد البصري</h3>
+          <p>أنشطة استكشافية قائمة على الصور والمقارنة البصرية لتحفيز التفكير الاستقرائي وصياغة الفرضيات.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🎥</div>
+          <h3>الشرح والتوضيح الرقمي</h3>
+          <p>عرض فيديو توضيحي مقترن بخرائط المفاهيم النحوية والقواعد الذهبية الميسرة للفهم.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🎮</div>
+          <h3>التلعيب والتعلم باللعب</h3>
+          <p>مسابقات بمؤقت زمني وألعاب تفاعلية لفرز وتصنيف الأفعال تعزز الدافعية والتنافس الإيجابي.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📜</div>
+          <h3>التقويم والشهادة الفورية</h3>
+          <p>تقييم ذاتي واختبار تحصيلي مقنن يرصد درجات الطالب ويمنحه شهادة إتقان معتمدة قابلة للطباعة.</p>
+        </div>
+      </section>
+
+      <!-- LESSONS SECTION AT THE END OF HOME (في آخر الرئيسية الدروس) -->
+      <section id="lessonsSection" class="lessons-home-section">
+        <div class="section-title-wrap">
+          <h3> فهرس دروس الوحدة النحوية</h3>
+          <p>اختر الدرس المطلوب واضغط على الزر المخصص للانتقال إلى صفحته التعليمية الكاملة:</p>
+        </div>
+
+        <div class="lessons-grid">
+          
+          <!-- Lesson 1 (The Active Model) -->
+          <div class="lesson-box featured">
+            <div>
+              <span class="lesson-badge-top">الدرس رقم (١)</span>
+              <h4>الدرس الأول: الفعل اللازم والمتعدي</h4>
+              <p>يتعرف الطالب على مفهوم الفعل اللازم الذي يكتفي بفاعله، والفعل المتعدي الذي ينصب مفعولاً به، وطرق التمييز بينهما وتطبيقهما في نصوص لغوية سليمة.</p>
+              
+              <div class="lesson-stations-pills">
+                <span class="station-mini-pill">١. تمهيد بالصورة</span>
+                <span class="station-mini-pill">٢. فيديو وشرح</span>
+                <span class="station-mini-pill">٣. مسابقة</span>
+                <span class="station-mini-pill">٤. لعبة تعليمية</span>
+                <span class="station-mini-pill">٥. تقويم تكويني</span>
+                <span class="station-mini-pill">٦. اختبار وشهادة</span>
+              </div>
+            </div>
+
+            <!-- The Button that takes the student to Lesson 1 Page -->
+            <button class="btn-enter-lesson" onclick="goToLesson(1)">
+              <span>دخول صفحة الدرس الأول</span>
+              <span style="font-size: 1.2rem;"></span>
+            </button>
+          </div>
+
+          <!-- Lesson 2 (Placeholder) -->
+          <div class="lesson-box">
+            <div>
+              <span class="lesson-badge-top" style="color: #64748b;">الدرس رقم (٢)</span>
+              <h4 style="color: #475569;">الدرس الثاني: الفاعل وعلامات إعرابه</h4>
+              <p>دراسة الفاعل، صوره المختلفة (اسم ظاهر، ضمير متصل، ضمير مستتر)، وعلامات رفعه الأصلية والفرعية.</p>
+              
+              <div class="lesson-stations-pills">
+                <span class="station-mini-pill">قيد التطوير الأكاديمي</span>
+                <span class="station-mini-pill">ضمن الخطة</span>
+              </div>
+            </div>
+
+            <button class="btn-disabled-lesson" onclick="goToLesson(2)">
+              <span>قريباً وفق خطة البحث </span>
+            </button>
+          </div>
+
+          <!-- Lesson 3 (Placeholder) -->
+          <div class="lesson-box">
+            <div>
+              <span class="lesson-badge-top" style="color: #64748b;">الدرس رقم (٣)</span>
+              <h4 style="color: #475569;">الدرس الثالث: المفعول به وصوره</h4>
+              <p>التعرف على صور المفعول به في الجملة الفعلية، وأحكام تقديمه على الفاعل، وتطبيقات إعرابية مقننة.</p>
+              
+              <div class="lesson-stations-pills">
+                <span class="station-mini-pill">قيد التطوير الأكاديمي</span>
+                <span class="station-mini-pill">ضمن الخطة</span>
+              </div>
+            </div>
+
+            <button class="btn-disabled-lesson" onclick="goToLesson(3)">
+              <span>قريباً وفق خطة البحث </span>
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- VIEW 2: LESSON 1 PAGE (صفحة الدرس الأول)   -->
+    <!-- ========================================== -->
+    <div id="lesson1View" style="display: none;">
+      
+      <!-- Top Navigation & Lesson Hero Bar -->
+      <div class="lesson-page-header">
+        <div>
+          <button class="btn-back-home" onclick="goToHome()">
+            <span>➡️ العودة إلى الصفحة الرئيسية للمقرر</span>
+          </button>
+          <h2 style="font-size: 1.6rem; color: var(--primary-dark); margin-top: 0.75rem;">
+            الدرس الأول: الفعل اللازم والفعل المتعدي
+          </h2>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
+            الأهداف الإجرائية: التمييز بين الفعل اللازم والمتعدي، تحديد أركان الجملة الفعلية، وتوظيفها لغوياً بدقة.
+          </p>
+        </div>
+        <div style="text-align: left;">
+          <span class="project-badge" style="background:#e0f2fe; color:#0369a1; border-color:#bae6fd;">
+            الوحدة الأولى: المنصوبات
+          </span>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs: The 6 User-Requested Sections -->
+      <div class="tabs-nav">
+        <button class="tab-btn active" onclick="showSection(1)">
+          <span class="tab-num">المحطة الأولى</span>
+          <span>١. نشاط الصورة التمهيدي</span>
+        </button>
+        <button class="tab-btn" onclick="showSection(2)">
+          <span class="tab-num">المحطة الثانية</span>
+          <span>٢. عرض الفيديو والشرح</span>
+        </button>
+        <button class="tab-btn" onclick="showSection(3)">
+          <span class="tab-num">المحطة الثالثة</span>
+          <span>٣. مسابقة الأبطال</span>
+        </button>
+        <button class="tab-btn" onclick="showSection(4)">
+          <span class="tab-num">المحطة الرابعة</span>
+          <span>٤. اللعبة التعليمية</span>
+        </button>
+        <button class="tab-btn" onclick="showSection(5)">
+          <span class="tab-num">المحطة الخامسة</span>
+          <span>٥. التقويم التكويني</span>
+        </button>
+        <button class="tab-btn" onclick="showSection(6)">
+          <span class="tab-num">المحطة السادسة</span>
+          <span>٦. الاختبار النهائي</span>
+        </button>
+      </div>
+
+      <!-- SECTION 1: نشاط صورة أنا أشتغل عليها كتمهيد للدرس -->
+      <section id="section1" class="section-panel active">
+        <div class="panel-box">
+          <div class="panel-header">
+            <div>
+              <h3> المحطة الأولى: نشاط الصورة التمهيدي (استكشف وفكر)</h3>
+              <p>نشاط استهلالي مصمم لقياس الملاحظة واستنتاج الفرق بين الأفعال قبل الدخول في الشرح النظري.</p>
+            </div>
+            <span class="pedagogical-goal">الهدف: استثارة الدافعية وبناء الفرضيات</span>
+          </div>
+
+          <div class="warmup-wrapper">
+            <!-- Visual Comparison Card / Interactive Image Canvas -->
+            <div class="image-work-area">
+              <div style="font-weight: 700; color: var(--primary-dark); font-size: 1rem;">
+                بطاقة المقارنة البصرية للملاحظة والتأمل
+              </div>
+
+              <!-- Visual comparison cards -->
+              <div class="visual-comparison-box" id="visualComparisonContainer">
+                <div class="visual-card card-lazim">
+                  <div class="visual-badge">🪑</div>
+                  <div>
+                    <div class="sentence-lead">جَلَسَ الطَّالِبُ عَلَى المَقْعَدِ</div>
+                    <div class="sentence-sub">فعل (جلسَ) + فاعل (الطالبُ) + شبه جملة (على المقعد)</div>
+                  </div>
+                </div>
+
+                <div class="visual-card card-mutaadi">
+                  <div class="visual-badge">📖</div>
+                  <div>
+                    <div class="sentence-lead">شَرَحَ المُعَلِّمُ الدَّرْسَ</div>
+                    <div class="sentence-sub">فعل (شرحَ) + فاعل (المعلمُ) + مفعول به (الدرسَ)</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Custom image upload or replace for the researcher/teacher -->
+              <div style="border-top: 1px dashed #cbd5e1; padding-top: 0.75rem;">
+                <label class="custom-img-upload-btn">
+                  <span>📷 استبدال الصورة بنشاط مصور من جهازك</span>
+                  <input type="file" id="customWarmupImgInput" accept="image/*" style="display:none;" onchange="handleWarmupImageUpload(this)">
+                </label>
+                <div id="imagePreviewSlot" style="margin-top: 0.5rem; display: none;"></div>
+              </div>
+            </div>
+
+            <!-- Right: Interactive Tasks & Questions -->
+            <div class="warmup-task-box">
+              <div class="guided-questions">
+                <h4> مهمة التفكير الموجه:</h4>
+                <ul>
+                  <li>تأمل الجملة الأولى: هل اكتمل معنى الجملة بالفعل والفاعل دون الحاجة إلى اسم منصوب يقع عليه الفعل؟</li>
+                  <li>تأمل الجملة الثانية: ماذا لو قلنا (شرحَ المعلمُ...) وسكتنا؟ هل يحتاج السامع لمعرفة ما الذي شُرح؟</li>
+                  <li>ماذا نسمي الفعل الذي يكتفي بفاعله؟ وماذا نسمي الفعل الذي يحتاج إلى مفعول به؟</li>
+                </ul>
+              </div>
+
+              <div class="interactive-notes-box">
+                <label style="font-weight: 600; font-size: 0.9rem; color: #374151;">
+                   سجّل ملاحظتك واستنتاجك الأولي هنا (تفاعل الطالب):
+                </label>
+                <textarea id="warmupStudentNotes" placeholder="اكتب استنتاجك هنا... مثلاً: ألاحظ أن جملة (جلس) لا تحتاج مفعول به، بينما (شرح) احتاجت كلمة الدرس..."></textarea>
+                <button class="btn-submit-notes" onclick="saveWarmupNotes()">تحقق من صحة استنتاجي واعتماده ✅</button>
+                <div class="feedback-alert" id="warmupFeedback">
+                  <strong>أحسنت الاستنتاج!</strong> الفعل في الجملة الأولى (جلس) فعل <strong>لازم</strong> لأنه اكتفى بفاعله، بينما في الجملة الثانية (شرح) فعل <strong>متعدٍ</strong> لأنه نصب مفعولاً به (الدرس) ليتم معناه.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: عرض الفيديو الخاص بالدرس -->
+      <section id="section2" class="section-panel">
+        <div class="panel-box">
+          <div class="panel-header">
+            <div>
+              <h3>🎥 المحطة الثانية: عرض الفيديو التعليمي وشرح القاعدة</h3>
+              <p>شاهد المحتوى الرقمي التوضيحي ثم استعرض خريطة المفاهيم والقواعد المنظمة.</p>
+            </div>
+            <span class="pedagogical-goal">الهدف: اكتساب المفاهيم والمعارف النحوية</span>
+          </div>
+
+          <div class="video-section-grid">
+            <!-- Video Player -->
+            <div>
+              <div class="video-player-frame" id="videoFrameContainer">
+                <div class="video-placeholder" id="videoPlaceholder">
+                  <div class="play-btn-circle" onclick="simulateVideoPlay()">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+                  </div>
+                  <div style="font-weight: 700; font-size: 1.15rem; margin-bottom: 0.25rem;">شرح مبسط: الفعل اللازم والفعل المتعدي</div>
+                  <div style="font-size: 0.85rem; opacity: 0.8;">المدة: ٠٤:٣٠ دقيقة | دقة عالية HD</div>
+                </div>
+                <iframe id="videoIframe" style="display:none;" allowfullscreen></iframe>
+              </div>
+
+              <!-- Quick Link Updater for Researcher -->
+              <div class="video-controls-bar">
+                <span>تضمين فيديو يوتيوب مخصص:</span>
+                <input type="text" id="videoUrlInput" placeholder="ضع رابط التضمين أو معرف الفيديو (Embed Link)...">
+                <button class="btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;" onclick="updateVideoUrl()">تحديث</button>
+              </div>
+            </div>
+
+            <!-- Conceptual Summary -->
+            <div class="summary-box">
+              <h4> خريطة المفاهيم وقواعد الدرس</h4>
+              
+              <div class="concept-card">
+                <strong>١. الفعل اللازم (Intransitive Verb):</strong>
+                هو الفعل الذي يكتفي برفع فاعله ليتم معنى الجملة، ولا يحتاج إلى مفعول به.<br>
+                <em>مثال:</em> «نَامَ الطِّفْلُ مَرْتَاحًا» - «أَشْرَقَتِ الشَّمْسُ».
+              </div>
+
+              <div class="concept-card alt">
+                <strong>٢. الفعل المتعدي (Transitive Verb):</strong>
+                هو الفعل الذي لا يكتفي بفاعله، بل يتعداه فينصب مفعولاً به واحداً أو أكثر ليتم معناه.<br>
+                <em>مثال:</em> «حَفِظَ الطَّالِبُ القَصِيدَةَ» - «كَرَّمَتِ الجَامِعَةُ المُتَفَوِّقِينَ».
+              </div>
+
+              <div class="concept-card" style="border-right-color: #10b981;">
+                <strong>الحيلة الذهبية للتفريق بينهما:</strong>
+                <ol style="padding-right: 1.25rem; margin-top: 0.25rem; font-size: 0.85rem;">
+                  <li><strong>إضافة هاء الغائب (ـه):</strong> إذا قبلها الفعل فهو متعدٍ (شرحه، كتبه)، وإن لم يقبلها فهو لازم (جلسه ❌، نامَه ❌).</li>
+                  <li><strong>السؤال بـ (ماذا؟):</strong> إذا صح السؤال بجواب مقنع فهو متعدٍ (ماذا كتب؟ الدرس).</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: مسابقة -->
+      <section id="section3" class="section-panel">
+        <div class="panel-box">
+          <div class="panel-header">
+            <div>
+              <h3> المحطة الثالثة: مسابقة تحدي الأبطال (Quiz)</h3>
+              <p>تحدي تفاعلي سريع لقياس سرعة البديهة والتمكن من القاعدة مع مؤقت ونقاط فورية.</p>
+            </div>
+            <span class="pedagogical-goal">الهدف: التثبيت الفوري والتنافس الإيجابي</span>
+          </div>
+
+          <div class="quiz-container">
+            <div class="quiz-header-bar">
+              <div class="quiz-timer">
+                <span> الوقت المتبقي:</span>
+                <span id="quizTimerVal">15</span> ثانية
+              </div>
+              <div class="quiz-score-badge">
+                <span>النقاط: </span>
+                <span id="quizScoreVal">0</span> / 50
+              </div>
+              <div style="font-size: 0.9rem; font-weight: 600; color: #475569;">
+                السؤال <span id="quizCurrentIndex">1</span> من 5
+              </div>
+            </div>
+
+            <!-- Quiz Question Card -->
+            <div id="quizQuestionArea">
+              <div class="quiz-question-card">
+                <div class="quiz-question-text" id="quizQuestionText">
+                  جاري تحميل السؤال...
+                </div>
+                <div class="quiz-options-grid" id="quizOptionsContainer">
+                  <!-- Generated by JS -->
+                </div>
+              </div>
+              <div id="quizFeedbackMsg" style="text-align:center; font-weight:700; min-height: 24px;"></div>
+            </div>
+
+            <!-- Quiz End Results -->
+            <div id="quizResultArea" class="quiz-result-view" style="display:none;">
+              <div class="quiz-result-icon" id="quizResultIcon">🏆</div>
+              <h3 style="font-size: 1.6rem; color: var(--primary-dark); margin-bottom: 0.5rem;" id="quizResultTitle">أداء رائع جداً!</h3>
+              <p style="font-size: 1.1rem; color: #4b5563; margin-bottom: 1.5rem;" id="quizResultSummary">حصلت على 50 من 50 نقطة في المسابقة السريعة.</p>
+              <button class="btn-primary" onclick="restartQuiz()">إعادة المسابقة 🔄</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: لعبة تعليمية -->
+      <section id="section4" class="section-panel">
+        <div class="panel-box">
+          <div class="panel-header">
+            <div>
+              <h3> المحطة الرابعة: اللعبة التعليمية (تحدي سلة الأفعال)</h3>
+              <p>قم بتصنيف الأفعال المعروضة بالسياق إلى سلة (الفعل اللازم) أو (الفعل المتعدي).</p>
+            </div>
+            <span class="pedagogical-goal">الهدف: التعلم باللعب وتعميق التصنيف العملي</span>
+          </div>
+
+          <div class="game-arena">
+            <div class="game-stats">
+              <div class="game-stat-item">⭐ الرصيد: <span id="gameScore">0</span></div>
+              <div class="game-stat-item">🎯 البطاقات المتبقية: <span id="gameCardsLeft">6</span></div>
+              <div class="game-stat-item">❤️ المحاولات: <span id="gameLives">❤️❤️❤️</span></div>
+            </div>
+
+            <!-- Central Verb Card -->
+            <div class="game-card-display" id="gameCardBox">
+              <div class="game-verb" id="gameVerbTitle">عَادَ</div>
+              <div class="game-sentence" id="gameSentenceDesc">«عَادَ المُسَافِرُ إِلَى وَطَنِهِ»</div>
+            </div>
+
+            <!-- Destination Baskets -->
+            <div class="game-drop-zones">
+              <button class="drop-btn drop-lazim" onclick="handleGameAnswer('lazim')">
+                <span style="font-size: 1.8rem;">🧺</span>
+                <span>سَلَّة الفِعْل اللَّازِم</span>
+                <span style="font-size: 0.78rem; font-weight: normal;">(يكتفي بفاعله فقط)</span>
+              </button>
+
+              <button class="drop-btn drop-mutaadi" onclick="handleGameAnswer('mutaadi')">
+                <span style="font-size: 1.8rem;">📦</span>
+                <span>سَلَّة الفِعْل المُتَعَدِّي</span>
+                <span style="font-size: 0.78rem; font-weight: normal;">(يحتاج لمفعول به)</span>
+              </button>
+            </div>
+
+            <div class="game-feedback-toast" id="gameFeedbackText"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5: تقويم -->
+      <section id="section5" class="section-panel">
+        <div class="panel-box">
+          <div class="panel-header">
+            <div>
+              <h3> المحطة الخامسة: التقويم التكويني والتقييم الذاتي</h3>
+              <p>بطاقة تقويم مهارات الدرس ومهمة إعرابية وتطبيقية للتأكد من رسوخ الأهداف التعليمية.</p>
+            </div>
+            <span class="pedagogical-goal">الهدف: التقويم من أجل التعلم وتغذية راجعة فردية</span>
+          </div>
+
+          <div class="evaluation-grid">
+            <!-- 1. Self-Assessment Rubric -->
+            <div class="rubric-box">
+              <h4> ١. بطاقة التقييم الذاتي للمتعلم:</h4>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.85rem;">
+                قيّم مدى قدرتك على إتقان المهارات التالية بعد دراسة هذا الدرس:
+              </p>
+              <table class="rubric-table">
+                <thead>
+                  <tr>
+                    <th>معيار المهارة النحوية</th>
+                    <th>ممتاز</th>
+                    <th>جيد</th>
+                    <th>أحتاج تدريب</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>التعرف على مفهوم الفعل اللازم</td>
+                    <td><input type="radio" name="r1" checked></td>
+                    <td><input type="radio" name="r1"></td>
+                    <td><input type="radio" name="r1"></td>
+                  </tr>
+                  <tr>
+                    <td>التعرف على مفهوم الفعل المتعدي</td>
+                    <td><input type="radio" name="r2" checked></td>
+                    <td><input type="radio" name="r2"></td>
+                    <td><input type="radio" name="r2"></td>
+                  </tr>
+                  <tr>
+                    <td>تطبيق قاعدة (هاء الغائب) للتمييز</td>
+                    <td><input type="radio" name="r3" checked></td>
+                    <td><input type="radio" name="r3"></td>
+                    <td><input type="radio" name="r3"></td>
+                  </tr>
+                  <tr>
+                    <td>تحديد المفعول به في الجمل المعقدة</td>
+                    <td><input type="radio" name="r4"></td>
+                    <td><input type="radio" name="r4" checked></td>
+                    <td><input type="radio" name="r4"></td>
+                  </tr>
+                </tbody>
+              </table>
+              <button class="btn-secondary" style="width: 100%; margin-top: 1rem;" onclick="alert('تم حفظ نتيجة التقييم الذاتي بنجاح في سجل المتعلم!')">
+                اعتماد التقييم الذاتي 
+              </button>
+            </div>
+
+            <!-- 2. Formative Practical Drill -->
+            <div class="drill-box">
+              <h4> ٢. تمرين تطبيقي تحليلي:</h4>
+              
+              <div class="drill-item">
+                <p>الجملة: «أَنْجَزَ البَاحِثُ مَشْرُوعَ المَاجِسْتِيرِ»</p>
+                <div class="drill-inputs">
+                  <select id="drill1_type">
+                    <option value="">نوع الفعل؟</option>
+                    <option value="mutaadi">متعدٍ</option>
+                    <option value="lazim">لازم</option>
+                  </select>
+                  <input type="text" id="drill1_obj" placeholder="المفعول به هو؟">
+                </div>
+              </div>
+
+              <div class="drill-item">
+                <p>الجملة: «انْطَلَقَ القِطَارُ سَرِيعًا فِي الصَّبَاحِ»</p>
+                <div class="drill-inputs">
+                  <select id="drill2_type">
+                    <option value="">نوع الفعل؟</option>
+                    <option value="lazim">لازم</option>
+                    <option value="mutaadi">متعدٍ</option>
+                  </select>
+                  <input type="text" id="drill2_obj" placeholder="المفعول به (إن وجد)؟">
+                </div>
+              </div>
+
+              <button class="btn-primary" style="width: 100%;" onclick="checkFormativeDrills()">
+                تحقق من الإجابات ورصد النتيجة 
+              </button>
+              <div id="drillFeedback" style="margin-top: 0.75rem; font-size: 0.9rem; text-align: center; font-weight: 600;"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 6: اختبار -->
+      <section id="section6" class="section-panel">
+        <div class="panel-box">
+          <div class="panel-header">
+            <div>
+              <h3> المحطة السادسة: الاختبار التحصيلي النهائي وإصدار الشهادة</h3>
+              <p>أجب عن الأسئلة المعيارية التالية لإتمام الدرس والحصول على شهادة الإنجاز المعتمدة من المنصة.</p>
+            </div>
+            <span class="pedagogical-goal">الهدف: التقويم الختامي وإصدار التغذية الختامية</span>
+          </div>
+
+          <div class="exam-wrapper" id="examQuestionsView">
+            <div class="exam-item">
+              <h5>س١: الجملة التي تشتمل على فعل لازم هي:</h5>
+              <div class="exam-options">
+                <label class="exam-opt-label">
+                  <input type="radio" name="q1" value="A"> أ) كتبَ الأديبُ روايةً شيقةً.
+                </label>
+                <label class="exam-opt-label">
+                  <input type="radio" name="q1" value="B"> ب) نامَ الطفلُ في فراشهِ هادئاً.
+                </label>
+                <label class="exam-opt-label">
+                  <input type="radio" name="q1" value="C"> ج) قرأَ الطالبُ القرآنَ الكريمَ.
+                </label>
+                <label class="exam-opt-label">
+                  <input type="radio" name="q1" value="D"> د) كرّمَ المعلمُ الفائزينَ.
+                </label>
+              </div>
+            </div>
+
+            <div class="exam-item">
+              <h5>س٢: علامة الفعل المتعدي التي تميزه عن اللازم هي:</h5>
+              <div class="exam-options">
+                <label class="exam-opt-label">
+                  <input type="radio" name="q2" value="A"> أ) اتصاله بتاء التأنيث الساكنة.
+                </label>
+                <label class="exam-opt-label">
+                  <input type="radio" name="q2" value="B"> ب) اتصاله بضمير هاء الغائب التي تعود على المفعول به.
+                </label>
+                <label class="exam-opt-label">
+                  <input type="radio" name="q2" value="C"> ج) دلالته على الزمن الماضي دائماً.
+                </label>
+                <label class="exam-opt-label">
+                  <input type="radio" name="q2" value="D"> د) قبوله تاء الفاعل فقط.
+                </label>
+              </div>
+            </div>
+
+            <div class="exam-item">
+              <h5>س٣: في قولنا: «شكرَ المؤمنُ ربَّهُ»، الفعل (شكرَ) نوعه:</h5>
+              <div class="exam-options">
+                <label class="exam-opt-label">
+                  <input type="radio" name="q3" value="A"> أ) فعل لازم؛ لأنه اكتفى بفاعله.
+                </label>
+                <label class="exam-opt-label">
+                  <input type="radio" name="q3" value="B"> ب) فعل متعدٍ؛ لأنه نصب مفعولاً به وهو (ربَّ).
+                </label>
+                <label class="exam-opt-label">
+                  <input type="radio" name="q3" value="C"> ج) فعل مبني للمجهول.
+                </label>
+                <label class="exam-opt-label">
+                  <input type="radio" name="q3" value="D"> د) فعل ناقص من أخوات كان.
+                </label>
+              </div>
+            </div>
+
+            <div class="exam-item">
+              <h5>س٤: كيف يمكن تحويل الفعل اللازم (خَرَجَ) إلى فعل متعدٍ؟</h5>
+              <div class="exam-options">
+                <label class="exam-opt-label">
+                  <input type="radio" name="q4" value="A"> أ) بزيادة همزة التعدية في أوله: «أَخْرَجَ المعلمُ الورقةَ».
+                </label>
+                <label class="exam-opt-label">
+                  <input type="radio" name="q4" value="B"> ب) بحذف الفاعل من الجملة تماماً.
+                </label>
+                <label class="exam-opt-label">
+                  <input type="radio" name="q4" value="C"> ج) بوضع حرف جر بعده مباشرة.
+                </label>
+                <label class="exam-opt-label">
+                  <input type="radio" name="q4" value="D"> د) لا يمكن تحويل الفعل اللازم إلى متعدٍ أبداً.
+                </label>
+              </div>
+            </div>
+
+            <button class="btn-submit-exam" onclick="submitFinalExam()">
+              تسليم الإجابات واعتماد النتيجة النهائية 📜
+            </button>
+          </div>
+
+          <!-- Printable Certificate View -->
+          <div class="certificate-container" id="certificateView">
+            <div class="cert-stamp">معتمد رقمياً<br>★ متميز ★</div>
+            <div style="font-size: 0.95rem; color: #b45309; font-weight: 700;">جمهورية مصر العربية - جامعة الوادي الجديد</div>
+            <div class="cert-title">شهادة تفوق وإتقان درس</div>
+            <div class="cert-subtitle">مشروع ماجستير: بيئة التعلم الرقمية في قواعد اللغة العربية</div>
+            
+            <p>يشهد القائمون على المنصة بأن الباحث / الطالب المتميز:</p>
+            <div class="cert-student-name" id="certStudentName">أحمد محمود عبد الله</div>
+            
+            <div class="cert-desc">
+              قد اجتاز بنجاح متطلبات <strong>«الدرس الأول: الفعل اللازم والمتعدي»</strong>، وأتم كافة الأنشطة التمهيدية، والمشاهدة التفاعلية، والمسابقة، واللعبة التعليمية، وحصل في الاختبار التحصيلي النهائي على نسبة إتقان قدرها:
+              <br>
+              <strong style="font-size: 1.4rem; color: #15803d;" id="certScorePercentage">100%</strong> (تقدير: ممتاز مرتفع)
+            </div>
+
+            <div class="cert-footer">
+              <div class="cert-sign-col">
+                <strong>تاريخ الإنجاز</strong>
+                <p id="certDateDisplay">15 أكتوبر 2026</p>
+              </div>
+              <div class="cert-sign-col">
+                <strong>الباحث المعد للبرنامج</strong>
+                <p id="certSignResearcher">محمد أحمد</p>
+              </div>
+              <div class="cert-sign-col">
+                <strong>ختم المنصة والجامعة</strong>
+                <p>معتمد أكاديمياً ✓</p>
+              </div>
+            </div>
+
+            <div style="margin-top: 1.75rem;">
+              <button class="btn-primary" onclick="window.print()">طباعة / حفظ الشهادة كـ PDF </button>
+              <button class="btn-secondary" style="margin-right: 0.5rem;" onclick="resetExam()">إعادة الاختبار </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Researcher Customization Settings Modal -->
+  <div class="researcher-modal" id="researcherModal">
+    <div class="modal-card">
+      <h3> لوحة الباحث: تعديل بيانات المشروع والجامعة</h3>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+        يمكنك من هنا تخصيص بيانات الجامعة، الكلية، اسم الباحث والمشرف، وعنوان المشروع بسهولة:
+      </p>
+
+      <div class="form-group">
+        <label>اسم الجامعة / المؤسسة الأكاديمية:</label>
+        <input type="text" id="cfgUniv" value="جامعة الوادي الجديد">
+      </div>
+
+      <div class="form-group">
+        <label>اسم الكلية:</label>
+        <input type="text" id="cfgFaculty" value="كلية التربية">
+      </div>
+
+      <div class="form-group">
+        <label>القسم العلمي:</label>
+        <input type="text" id="cfgDept" value="قسم المناهج وطرق التدريس وتكنولوجيا التعليم">
+      </div>
+
+      <div class="form-group">
+        <label>عنوان مشروع الماجستير / المنصة:</label>
+        <input type="text" id="cfgTitle" value="المنصة التعليمية التفاعلية لقواعد اللغة العربية">
+      </div>
+
+      <div class="form-group">
+        <label>اسم الباحث (معد المشروع):</label>
+        <input type="text" id="cfgResearcher" value="اسم الباحثة ">
+      </div>
+
+      <div class="form-group">
+        <label>لجنة الإشراف الأكاديمي:</label>
+        <input type="text" id="cfgSupervisor" value="أ.د/ لجنة الإشراف الأكاديمي">
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-secondary" onclick="closeResearcherModal()">إلغاء</button>
+        <button class="btn-primary" onclick="saveResearcherSettings()">حفظ التعديلات وتطبيقها </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio Context & App Navigation Logic -->
+  <script>
+    // Web Audio Sound Generator
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+
+    function playTone(freq, duration, type='sine') {
+      try {
+        if (!audioCtx) audioCtx = new AudioContext();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {
+        console.log('Audio disabled or not supported');
+      }
+    }
+
+    function soundSuccess() {
+      playTone(523.25, 0.15); // C5
+      setTimeout(() => playTone(659.25, 0.2), 120); // E5
+      setTimeout(() => playTone(783.99, 0.3), 240); // G5
+    }
+
+    function soundError() {
+      playTone(220, 0.25, 'sawtooth');
+      setTimeout(() => playTone(180, 0.35, 'sawtooth'), 180);
+    }
+
+    /* Page Navigation Logic: Home <-> Lesson */
+    function goToHome() {
+      soundSuccess();
+      document.getElementById('homeView').style.display = 'block';
+      document.getElementById('lesson1View').style.display = 'none';
+      document.getElementById('breadcrumbArrow').style.display = 'none';
+      document.getElementById('currentBreadcrumb').innerText = 'الصفحة الرئيسية للمقرر';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function scrollToLessons() {
+      const el = document.getElementById('lessonsSection');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function goToLesson(lessonNum) {
+      if (lessonNum === 1) {
+        soundSuccess();
+        document.getElementById('homeView').style.display = 'none';
+        document.getElementById('lesson1View').style.display = 'block';
+        document.getElementById('breadcrumbArrow').style.display = 'inline';
+        document.getElementById('currentBreadcrumb').innerText = 'الدرس الأول: الفعل اللازم والمتعدي';
+        showSection(1);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        alert('هذا الدرس قيد الإعداد ضمن الخطة البحثية وسيتاح فور اكتمال تحكيمه.');
+      }
+    }
+
+    /* Tabs Switching inside Lesson 1 */
+    function showSection(sectionNum) {
+      document.querySelectorAll('#lesson1View .tab-btn').forEach((btn, idx) => {
+        btn.classList.toggle('active', (idx + 1) === sectionNum);
+      });
+      document.querySelectorAll('#lesson1View .section-panel').forEach((panel, idx) => {
+        panel.classList.toggle('active', (idx + 1) === sectionNum);
+      });
+
+      if (sectionNum === 3 && currentQuizQuestion === 0) {
+        startQuiz();
+      }
+    }
+
+    /* SECTION 1: Warmup & Image Activity */
+    function saveWarmupNotes() {
+      const notes = document.getElementById('warmupStudentNotes').value.trim();
+      if (!notes) {
+        alert('من فضلك اكتب استنتاجك أو ملاحظتك حول الجملتين أولاً.');
+        return;
+      }
+      soundSuccess();
+      document.getElementById('warmupFeedback').style.display = 'block';
+    }
+
+    function handleWarmupImageUpload(input) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const slot = document.getElementById('imagePreviewSlot');
+          slot.innerHTML = `<img src="${e.target.result}" style="max-width:100%; border-radius:8px; max-height:240px; object-fit:contain; border:1px solid #cbd5e1;">`;
+          slot.style.display = 'block';
+          document.getElementById('visualComparisonContainer').style.display = 'none';
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    /* SECTION 2: Video Logic */
+    function simulateVideoPlay() {
+      soundSuccess();
+      const placeholder = document.getElementById('videoPlaceholder');
+      placeholder.innerHTML = `
+        <div style="text-align:center; padding: 2rem;">
+          <div style="font-size: 3rem; margin-bottom: 0.5rem;">🎬</div>
+          <div style="font-size: 1.2rem; font-weight:700;">جاري عرض الشرح التعليمي التفاعلي</div>
+          <p style="font-size: 0.9rem; opacity: 0.85; margin-top:0.5rem;">يمكنك إدراج رابط يوتيوب مخصص من شريط التحكم بالأسفل في أي وقت.</p>
+        </div>
+      `;
+    }
+
+    function updateVideoUrl() {
+      const url = document.getElementById('videoUrlInput').value.trim();
+      if (!url) {
+        alert('الرجاء كتابة رابط فيديو يوتيوب أو التضمين');
+        return;
+      }
+      const iframe = document.getElementById('videoIframe');
+      const placeholder = document.getElementById('videoPlaceholder');
+      
+      let embedUrl = url;
+      if (url.includes('watch?v=')) {
+        embedUrl = url.replace('watch?v=', 'embed/');
+      } else if (url.includes('youtu.be/')) {
+        embedUrl = url.replace('youtu.be/', 'youtube.com/embed/');
+      }
+
+      iframe.src = embedUrl;
+      iframe.style.display = 'block';
+      placeholder.style.display = 'none';
+      alert('تم تحديث مصدر الفيديو بنجاح!');
+    }
+
+    /* SECTION 3: Speed Quiz Logic */
+    const quizData = [
+      {
+        q: "الفعل الذي يكتفي بفاعله ولا ينصب مفعولاً به يُسمّى:",
+        opts: ["فعل متعدٍ", "فعل لازم", "فعل ناسخ", "فعل معتل"],
+        ans: 1
+      },
+      {
+        q: "في جملة «فَرِحَ الطَّالِبُ بِنَجَاحِهِ»، الفعل (فرحَ) هو:",
+        opts: ["فعل لازم", "فعل متعدٍ لمفعولين", "فعل متعدٍ لمفعول واحد", "فعل مبني للمجهول"],
+        ans: 0
+      },
+      {
+        q: "أيّ الجمل الآتية تحتوي على فعل متعدٍ؟",
+        opts: ["جَلَسَ الجَدُّ فِي الحَدِيقَةِ", "أَشْرَقَتِ الشَّمْسُ صَبَاحًا", "قَرَأَ البَاحِثُ المَرْجِعَ", "نَامَ الطِّفْلُ مُبَكِّرًا"],
+        ans: 2
+      },
+      {
+        q: "لاختبار تعدي الفعل (رَسَمَ)، نقوم بإضافة هاء الغائب فنقول:",
+        opts: ["رَسَمَهُ (مقبولة - متعدٍ)", "رَسَمَهُ (غير مقبولة - لازم)", "لا يجوز اتصال الضمائر به", "رَسَمْتُ فقط"],
+        ans: 0
+      },
+      {
+        q: "«كَتَبَ المُؤَلِّفُ الكِتَابَ»، إعراب كلمة (الكتابَ):",
+        opts: ["فاعل مرفوع", "مفعول به منصوب", "مضاف إليه مجرور", "نعت منصوب"],
+        ans: 1
+      }
+    ];
+
+    let currentQuizQuestion = 0;
+    let quizScore = 0;
+    let quizTimer = 15;
+    let quizInterval = null;
+
+    function startQuiz() {
+      currentQuizQuestion = 0;
+      quizScore = 0;
+      document.getElementById('quizScoreVal').innerText = quizScore;
+      document.getElementById('quizQuestionArea').style.display = 'block';
+      document.getElementById('quizResultArea').style.display = 'none';
+      renderQuizQuestion();
+    }
+
+    function renderQuizQuestion() {
+      clearInterval(quizInterval);
+      quizTimer = 15;
+      document.getElementById('quizTimerVal').innerText = quizTimer;
+      document.getElementById('quizFeedbackMsg').innerText = '';
+      
+      const item = quizData[currentQuizQuestion];
+      document.getElementById('quizCurrentIndex').innerText = currentQuizQuestion + 1;
+      document.getElementById('quizQuestionText').innerText = item.q;
+
+      const optsBox = document.getElementById('quizOptionsContainer');
+      optsBox.innerHTML = '';
+
+      item.opts.forEach((optText, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-opt-btn';
+        btn.innerText = optText;
+        btn.onclick = () => selectQuizAnswer(index);
+        optsBox.appendChild(btn);
+      });
+
+      quizInterval = setInterval(() => {
+        quizTimer--;
+        document.getElementById('quizTimerVal').innerText = quizTimer;
+        if (quizTimer <= 0) {
+          clearInterval(quizInterval);
+          selectQuizAnswer(-1); // time out
+        }
+      }, 1000);
+    }
+
+    function selectQuizAnswer(idx) {
+      clearInterval(quizInterval);
+      const item = quizData[currentQuizQuestion];
+      const buttons = document.querySelectorAll('.quiz-opt-btn');
+      
+      buttons.forEach((btn, i) => {
+        btn.disabled = true;
+        if (i === item.ans) {
+          btn.classList.add('correct');
+        } else if (i === idx) {
+          btn.classList.add('wrong');
+        }
+      });
+
+      const feedback = document.getElementById('quizFeedbackMsg');
+      if (idx === item.ans) {
+        soundSuccess();
+        quizScore += 10;
+        document.getElementById('quizScoreVal').innerText = quizScore;
+        feedback.innerHTML = '<span style="color:#10b981;">إجابة صحيحة وممتازة! +10 نقاط 👏</span>';
+      } else {
+        soundError();
+        feedback.innerHTML = '<span style="color:#ef4444;">إجابة غير صحيحة.. لاحظ تعليل القاعدة! ⚠️</span>';
+      }
+
+      setTimeout(() => {
+        currentQuizQuestion++;
+        if (currentQuizQuestion < quizData.length) {
+          renderQuizQuestion();
+        } else {
+          finishQuiz();
+        }
+      }, 1400);
+    }
+
+    function finishQuiz() {
+      document.getElementById('quizQuestionArea').style.display = 'none';
+      const resultArea = document.getElementById('quizResultArea');
+      resultArea.style.display = 'block';
+
+      const title = document.getElementById('quizResultTitle');
+      const desc = document.getElementById('quizResultSummary');
+      const icon = document.getElementById('quizResultIcon');
+
+      if (quizScore >= 40) {
+        icon.innerText = '🏆';
+        title.innerText = 'أداء متميز وبطل نحوي!';
+      } else {
+        icon.innerText = '💪';
+        title.innerText = 'محاولة جيدة، يمكنك التحسن أكثر!';
+      }
+      desc.innerText = `لقد حصلت على ${quizScore} من إجمالي 50 نقطة في المسابقة السريعة.`;
+    }
+
+    function restartQuiz() {
+      startQuiz();
+    }
+
+    /* SECTION 4: Game Arena Logic */
+    const gameDeck = [
+      { verb: "نَامَ", sentence: "«نَامَ الطِّفْلُ فِي سَرِيرِهِ»", type: "lazim", reason: "يكتفي برفع الفاعل (الطفل)" },
+      { verb: "شَرِبَ", sentence: "«شَرِبَ المَرِيضُ الدَّوَاءَ»", type: "mutaadi", reason: "يحتاج لمفعول به وهو (الدواء)" },
+      { verb: "ذَهَبَ", sentence: "«ذَهَبَ التِّلْمِيذُ إِلَى المَدْرَسَةِ»", type: "lazim", reason: "يكتفي بالفاعل وشبه الجملة" },
+      { verb: "فَتَحَ", sentence: "«فَتَحَ الحَارِسُ البَابَ»", type: "mutaadi", reason: "نصب مفعولاً به وهو (الباب)" },
+      { verb: "جَلَسَ", sentence: "«جَلَسَ الضَّيْفُ مُرْتَاحًا»", type: "lazim", reason: "يكتفي بالفاعل و(مرتاحاً) حال" },
+      { verb: "أَكَلَ", sentence: "«أَكَلَ الصَّائِمُ التَّمْرَةَ»", type: "mutaadi", reason: "نصب مفعولاً به وهو (التمرة)" }
+    ];
+
+    let gameIdx = 0;
+    let gamePoints = 0;
+    let gameLivesCount = 3;
+
+    function renderGameCard() {
+      if (gameIdx >= gameDeck.length || gameLivesCount <= 0) {
+        document.getElementById('gameCardBox').innerHTML = `
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎉</div>
+          <div style="font-weight:700; font-size:1.3rem; color:var(--primary);">اكتمل تحدي سلة الأفعال!</div>
+          <p style="margin: 0.5rem 0;">مجموع نقاطك: <strong>${gamePoints}</strong> نقطة</p>
+          <button class="btn-primary" onclick="restartGame()">العب مجدداً 🔄</button>
+        `;
+        document.getElementById('gameCardsLeft').innerText = '0';
+        return;
+      }
+
+      const item = gameDeck[gameIdx];
+      document.getElementById('gameVerbTitle').innerText = item.verb;
+      document.getElementById('gameSentenceDesc').innerText = item.sentence;
+      document.getElementById('gameCardsLeft').innerText = gameDeck.length - gameIdx;
+    }
+
+    function handleGameAnswer(chosenType) {
+      if (gameIdx >= gameDeck.length || gameLivesCount <= 0) return;
+      const current = gameDeck[gameIdx];
+      const feedback = document.getElementById('gameFeedbackText');
+
+      if (chosenType === current.type) {
+        soundSuccess();
+        gamePoints += 15;
+        document.getElementById('gameScore').innerText = gamePoints;
+        feedback.innerHTML = `<span style="color:#16a34a;">رائع! الفعل (${current.verb}) ${chosenType === 'lazim' ? 'لازم' : 'متعدٍ'} لأنه ${current.reason} ✓</span>`;
+      } else {
+        soundError();
+        gameLivesCount--;
+        updateLivesDisplay();
+        feedback.innerHTML = `<span style="color:#dc2626;">خطأ! الفعل (${current.verb}) ${current.type === 'lazim' ? 'لازم' : 'متعدٍ'} لأنه ${current.reason} ✗</span>`;
+      }
+
+      gameIdx++;
+      setTimeout(() => {
+        feedback.innerText = '';
+        renderGameCard();
+      }, 1200);
+    }
+
+    function updateLivesDisplay() {
+      let hearts = '';
+      for (let i = 0; i < gameLivesCount; i++) hearts += '❤️';
+      for (let i = gameLivesCount; i < 3; i++) hearts += '🖤';
+      document.getElementById('gameLives').innerText = hearts;
+    }
+
+    function restartGame() {
+      gameIdx = 0;
+      gamePoints = 0;
+      gameLivesCount = 3;
+      document.getElementById('gameScore').innerText = '0';
+      updateLivesDisplay();
+      document.getElementById('gameCardBox').innerHTML = `
+        <div class="game-verb" id="gameVerbTitle">عَادَ</div>
+        <div class="game-sentence" id="gameSentenceDesc">«عَادَ المُسَافِرُ إِلَى وَطَنِهِ»</div>
+      `;
+      renderGameCard();
+    }
+
+    /* SECTION 5: Formative Assessment Drill Check */
+    function checkFormativeDrills() {
+      const q1Type = document.getElementById('drill1_type').value;
+      const q1Obj = document.getElementById('drill1_obj').value.trim();
+      const q2Type = document.getElementById('drill2_type').value;
+      const q2Obj = document.getElementById('drill2_obj').value.trim();
+
+      const feed = document.getElementById('drillFeedback');
+      
+      let score = 0;
+      if (q1Type === 'mutaadi') score++;
+      if (q1Obj.includes('مشروع') || q1Obj.includes('المشروع')) score++;
+      if (q2Type === 'lazim') score++;
+      if (q2Obj === '' || q2Obj === 'لا يوجد' || q2Obj.includes('لا')) score++;
+
+      if (score >= 3) {
+        soundSuccess();
+        feed.innerHTML = `<span style="color:#16a34a;">إجابات ممتازة ودقيقة جداً! (${score}/4) - تمكنت من رصد أركان الجملة بنجاح 🌟</span>`;
+      } else {
+        soundError();
+        feed.innerHTML = `<span style="color:#e11d48;">نتيجة المحاولة: (${score}/4) - تذكر: في الجملة الأولى (مشروع) مفعول به، وفي الثانية الفعل لازم لا مفعول له.</span>`;
+      }
+    }
+
+    /* SECTION 6: Summative Test & Certificate Generation */
+    function submitFinalExam() {
+      const q1 = document.querySelector('input[name="q1"]:checked');
+      const q2 = document.querySelector('input[name="q2"]:checked');
+      const q3 = document.querySelector('input[name="q3"]:checked');
+      const q4 = document.querySelector('input[name="q4"]:checked');
+
+      if (!q1 || !q2 || !q3 || !q4) {
+        alert('من فضلك أجب عن جميع أسئلة الاختبار النهائي أولاً.');
+        return;
+      }
+
+      let examScore = 0;
+      if (q1.value === 'B') examScore++; // نام الطفل
+      if (q2.value === 'B') examScore++; // هاء الغائب
+      if (q3.value === 'B') examScore++; // متعد لمفعول به
+      if (q4.value === 'A') examScore++; // همزة التعدية
+
+      const pct = (examScore / 4) * 100;
+      soundSuccess();
+
+      // Show Certificate
+      document.getElementById('examQuestionsView').style.display = 'none';
+      const cert = document.getElementById('certificateView');
+      cert.style.display = 'block';
+
+      document.getElementById('certScorePercentage').innerText = `${pct}%`;
+      const researcherName = document.getElementById('dispResearcher').innerText.replace('إعداد الباحث:', '').trim();
+      document.getElementById('certSignResearcher').innerText = researcherName;
+
+      // Ask student name if default
+      const studentPrompt = prompt('مبروك اجتياز الاختبار! اكتب اسم الطالب لإدراجه في شهادة التفوق:', 'أحمد محمود عبد الله');
+      if (studentPrompt) {
+        document.getElementById('certStudentName').innerText = studentPrompt;
+      }
+    }
+
+    function resetExam() {
+      document.getElementById('examQuestionsView').style.display = 'block';
+      document.getElementById('certificateView').style.display = 'none';
+      document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+    }
+
+    /* Researcher Settings Modal Handlers */
+    function openResearcherModal() {
+      document.getElementById('researcherModal').classList.add('open');
+    }
+
+    function closeResearcherModal() {
+      document.getElementById('researcherModal').classList.remove('open');
+    }
+
+    function saveResearcherSettings() {
+      const univ = document.getElementById('cfgUniv').value;
+      const fac = document.getElementById('cfgFaculty').value;
+      const dept = document.getElementById('cfgDept').value;
+      const title = document.getElementById('cfgTitle').value;
+      const res = document.getElementById('cfgResearcher').value;
+      const sup = document.getElementById('cfgSupervisor').value;
+
+      document.getElementById('dispUniv').innerText = `${univ} | بيئة تعلم رقمية قائمة على الأنشطة التفاعلية`;
+      document.getElementById('dispFaculty').innerText = fac;
+      document.getElementById('dispDept').innerText = dept;
+      document.getElementById('dispProjectTitle').innerText = title;
+      document.getElementById('dispResearcher').innerHTML = `إعداد الباحث: <strong>${res}</strong>`;
+      document.getElementById('dispSupervisor').innerHTML = `إشراف: <strong>${sup}</strong>`;
+
+      closeResearcherModal();
+      soundSuccess();
+      alert('تم تحديث بيانات مشروع الماجستير والجامعة بنجاح!');
+    }
+
+    // Init on load
+    window.addEventListener('DOMContentLoaded', () => {
+      renderGameCard();
+    });
+  </script>
+</body>
+</html>
